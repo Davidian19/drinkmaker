@@ -106,6 +106,7 @@ export default function Home() {
               </CardContent>
             </CardActionArea>
           </Card>
+          
         </Grid>
       </Grid>
     </main>
