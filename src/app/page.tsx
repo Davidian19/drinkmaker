@@ -12,7 +12,7 @@ import {
   CardActionArea,
 } from "@mui/material";
 import logo from "@/assets/img/logoDrink.png";
-import { dataBase } from "../app/firebaseConfig";
+import { db, dataBase } from "../app/firebaseConfig";
 
 export default function Home() {
   const addDrink = async (drink: number) => {
@@ -20,12 +20,12 @@ export default function Home() {
       const ref = dataBase.ref("test/drinks");
 
       await ref.set(drink);
-      
       console.log("Attempting to add drink:", drink);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
+
   return (
     <main className={styles.main}>
       <Grid
@@ -52,7 +52,7 @@ export default function Home() {
             marginTop: "10px",
           }}
         >
-          <Card sx={{ width: 100 }} onClick={() => addDrink(1)}>
+          <Card sx={{ width: 250 }} onClick={() => addDrink(1)}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -70,7 +70,7 @@ export default function Home() {
               </CardContent>
             </CardActionArea>
           </Card>
-          <Card sx={{ width: 100 }} onClick={() => addDrink(2)}>
+          <Card sx={{ width: 250 }} onClick={() => addDrink(2)}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -88,7 +88,7 @@ export default function Home() {
               </CardContent>
             </CardActionArea>
           </Card>
-          <Card sx={{ width: 100 }} onClick={() => addDrink(3)}>
+          <Card sx={{ width: 250 }} onClick={() => addDrink(3)}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -106,7 +106,6 @@ export default function Home() {
               </CardContent>
             </CardActionArea>
           </Card>
-          
         </Grid>
       </Grid>
     </main>
