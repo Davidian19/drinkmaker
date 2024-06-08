@@ -18,9 +18,7 @@ export default function Home() {
   const addDrink = async (drink: number) => {
     try {
       const ref = dataBase.ref("test/drinks");
-
       await ref.set(drink);
-      console.log("Attempting to add drink:", drink);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
