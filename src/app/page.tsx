@@ -20,7 +20,7 @@ export default function Home() {
       const ref = dataBase.ref("test/drinks");
 
       await ref.set(drink);
-      await ref.push("id", drink);
+      //await ref.push("id", drink);
       console.log("Attempting to add drink:", drink);
     } catch (e) {
       console.error("Error adding document: ", e);
