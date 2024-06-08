@@ -1,95 +1,113 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
+import {
+  Grid,
+  Card,
+  Typography,
+  CardContent,
+  CardMedia,
+  CardActionArea,
+} from "@mui/material";
+import logo from "@/assets/img/logoDrink.png";
+import { db, dataBase } from "../app/firebaseConfig";
 
 export default function Home() {
+  const addDrink = async (drink: number) => {
+    try {
+      const ref = dataBase.ref("test/drinks");
+
+      await ref.set(drink);
+      await ref.push("id", drink);
+      console.log("Attempting to add drink:", drink);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          justifyContent: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <Image alt="logo" src={logo} width={300} height={200} />
+        <h2 style={{ color: "#FFF" }}>Escolha sua bebida: </h2>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            justifyContent: "center",
+            flexDirection: "row",
+            display: "flex",
+            gap: "10px",
+            marginTop: "10px",
+          }}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          <Card sx={{ width: 100 }} onClick={() => addDrink(1)}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                src="https://i.panelinha.com.br/i1/228-q-8730-blog-caipirinha-de-limao.webp"
+                alt="Caipirinha"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Caipirinha
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Cachaça e schweppes
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card sx={{ width: 100 }} onClick={() => addDrink(2)}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image="https://pubimg.band.uol.com.br/files/b8d56875f701473b38da.png"
+                alt="Caipiroska"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Caipiroska
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Vodka e schweppes
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card sx={{ width: 100 }} onClick={() => addDrink(3)}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image="https://colherdeouro.com.br/wp-content/uploads/2024/01/Drink-Mojito.jpg"
+                alt="Mojito"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Mojito
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Rum e schweppes
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </Grid>
     </main>
   );
 }
