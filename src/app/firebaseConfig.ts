@@ -1,9 +1,6 @@
 "use client";
 
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/database";
-import "firebase/analytics";
+import firebase from "firebase";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -16,20 +13,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-let firebaseApp;
-
-if (typeof window !== "undefined") {
-  if (!firebase.apps.length) {
-    firebaseApp = firebase.initializeApp(firebaseConfig);
-    if ("measurementId" in firebaseConfig) {
-      firebase.analytics();
-    }
-  } else {
-    firebaseApp = firebase.app();
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+  if ("measurementId" in firebaseConfig) {
+    firebase.analytics();
   }
+} else {
+  firebase.app();
 }
 
-const db = firebaseApp?.firestore();
-const dataBase = firebaseApp?.database();
+const db = firebase.firestore();
+const dataBase = firebase.database();
 export { db, dataBase };
-export default firebaseApp;
+export default firebase;
