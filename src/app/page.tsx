@@ -12,7 +12,7 @@ import {
   CardActionArea,
 } from "@mui/material";
 import logo from "@/assets/img/logoDrink.png";
-import { db, dataBase } from "../app/firebaseConfig";
+import { dataBase } from "../app/firebaseConfig";
 
 export default function Home() {
   const addDrink = async (drink: number) => {
